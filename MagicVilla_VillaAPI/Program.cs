@@ -1,5 +1,6 @@
 /*using Serilog;*/
 
+using MagicVilla_VillaAPI;
 using MagicVilla_VillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();*/    
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});  
+});
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddControllers(options => {
     //options.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
